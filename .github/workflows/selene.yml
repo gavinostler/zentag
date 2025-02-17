@@ -1,6 +1,17 @@
 name: build
 on: [push]
 jobs:
+  formatting:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: StyLua
+        uses: JohnnyMorganz/stylua-action@v4.0.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          version: latest
+          args: --check .
   lint:
     runs-on: ubuntu-22.04
     steps:
@@ -15,5 +26,4 @@ jobs:
         run: selene generate-roblox-std
       - name: Run Selene
         run: selene src
-      - name: StyLua
-        uses: JohnnyMorganz/stylua-action@v4.0.0
+  

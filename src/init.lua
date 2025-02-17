@@ -10,7 +10,7 @@ local CacheTag = {
 	_tagWarning = isStudio,
 	_tags = {},
 	_cache = {},
-} :: CacheTagger
+}
 
 type CacheTagger = {
 	_tagWarning: boolean,
@@ -21,6 +21,7 @@ type CacheTagger = {
 
 	unstableCache: <T>(self: CacheTagger, f: () -> T, tags: { string }) -> () -> T?,
 	revalidateTag: (self: CacheTagger, tag: string) -> (),
+	revalidateMultipleTags: (self: CacheTagger, tags: { string }) -> (),
 	disableTagWarning: (self: CacheTagger) -> (),
 }
 
@@ -106,8 +107,19 @@ function CacheTag.revalidateTag(self: CacheTagger, tag: string)
 	end)
 end
 
+--[=[
+	Revalidates multiple tags.
+
+	@param tags {string}
+]=]
+function CacheTag.revalidateMultipleTags(self: CacheTagger, tags: { string })
+	Iterable(tags):forEach(function(tag: string)
+		self:revalidateTag(tag)
+	end)
+end
+
 function CacheTag.disableTagWarning(self: CacheTagger)
 	self._tagWarning = false
 end
 
-return CacheTag
+return CacheTag :: CacheTagger

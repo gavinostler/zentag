@@ -1,0 +1,23 @@
+{
+  "name": "zentag test",
+  "tree": {
+    "$className": "DataModel",
+    "ReplicatedStorage": {
+      "$className": "ReplicatedStorage",
+
+      "CacheTagger": {
+        "$path": "src"
+      }
+    },
+    "StarterPlayer": {
+      "$className": "StarterPlayer",
+      "StarterPlayerScripts": {
+        "$className": "StarterPlayerScripts",
+
+        "test": {
+          "$path": "test"
+        }
+      }
+    }
+  }
+}

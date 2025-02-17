@@ -15,3 +15,5 @@ jobs:
         run: selene generate-roblox-std
       - name: Run Selene
         run: selene src
+      - name: StyLua
+        uses: JohnnyMorganz/stylua-action@v4.0.0

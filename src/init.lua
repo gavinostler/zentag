@@ -31,9 +31,12 @@ type Cache<T> = {
 	invalid: boolean,
 }
 
---[[
+--[=[
     Assigns a tag to a cache id.
-]]
+
+    @param tag string
+    @param id string
+]=]
 function CacheTag._addToTag(self: CacheTagger, tag: string, id: string)
 	if not self._tags[tag] then
 		self._tags[tag] = {}
@@ -41,9 +44,26 @@ function CacheTag._addToTag(self: CacheTagger, tag: string, id: string)
 	table.insert(self._tags[tag], id)
 end
 
---[[
-    Since the behavior of the garbage collection of lua will not delete a cache if it is no longer used, this is considered unsafe.
-]]
+--[=[
+    Creates a cache given a function and tag.
+
+    ```lua
+    -- Example with math.random()
+    local getRandomNumberCache = zentag:unstableCache(function()
+        return math.random(1,4)
+    end,{"number"})
+
+    print(getRandomNumberCache()) -- A random value
+    print(getRandomNumberCache()) -- A cached random value, same as above.
+    zentag:revalidateTag("number") -- Invalidates previous value.
+    print(getRandomNumberCache()) -- A new random value, differs from above.
+    print(getRandomNumberCache()) -- A cached random value, same as the line directly above.
+    ```
+
+	@param f () -> T
+	@param tags {string}
+	@return () -> T?
+]=]
 function CacheTag.unstableCache<T>(self: CacheTagger, f: () -> T, tags: { string }): () -> T?
 	if typeof(f) ~= "function" then
 		error(`AssertionError: f must be a function, got {typeof(f)}`)
@@ -84,9 +104,11 @@ function CacheTag.unstableCache<T>(self: CacheTagger, f: () -> T, tags: { string
 	end
 end
 
---[[
-    Invalidator, will only request new value upon use
-]]
+--[=[
+	Revalidates a single tag, invalidating the previous cache of any function with the tag.
+
+	@param tag string
+]=]
 function CacheTag.revalidateTag(self: CacheTagger, tag: string)
 	if typeof(tag) ~= "string" then
 		error(`AssertionError: tag must be a string, got {typeof(tag)}`)
@@ -96,7 +118,7 @@ function CacheTag.revalidateTag(self: CacheTagger, tag: string)
 		if self._tagWarning then
 			warn(
 				`There was an attempt to invalidate a tag with no functions attached to it. This warning will not show up in production.`
-					.. `\nTag: {tag}\n\nTo disable, run \`CacheTagger.disableTagWarning()\` at runtime.`
+					.. `\nTag: {tag}\n\nTo disable, run \`zentag:disableTagWarning()\` at runtime.`
 			)
 		end
 		return

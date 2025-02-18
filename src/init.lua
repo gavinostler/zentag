@@ -80,7 +80,7 @@ function CacheTag.unstableCache<T>(self: CacheTagger, f: () -> T, tags: { string
 		end
 	end)
 
-	-- Done seprately so if the type check fails it doesnt fuck up everything
+	-- Done seprately so if the type check fails it doesent create the tag that fails
 	tagsIterable:forEach(function(tag: string)
 		self:_addToTag(tag, tostring(f))
 	end)

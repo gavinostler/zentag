@@ -1,5 +1,5 @@
 # zentag
-[![](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT "License: MIT")
+[![](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT "License: MIT") [![](https://img.shields.io/github/issues/gavinostler/zentag.svg)](https://github.com/gavinostler/zentag/issues) [![](https://img.shields.io/github/issues-pr/gavinostler/zentag.svg)](https://github.com/gavinostler/zentag/issues) 
 
 Basic tag related cacher that I wrote in a day. Could be used with [Promise](https://eryn.io/roblox-lua-promise/) for API calls... unsure of its performance.
 

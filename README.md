@@ -45,7 +45,3 @@ To disable, run `zentag:disableTagWarning()` at runtime.
 ```
 
 This warning will disappear in production, but if you'd like to disable it, just run `zentag:disableTagWarning()` once.
-
-## Notes
-Please star if you found this nice! I don't really publish anything usually, so this is out of the ordinary for me!
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/J3J713QNYW)

@@ -13,6 +13,7 @@ type IterableImpl<T> = {
 
 	map: <A>(self: IterableImpl<T>, func: (currentValue: T, index: number) -> A) -> { A },
 	forEach: (self: IterableImpl<T>, func: (currentValue: T, index: number) -> ()) -> nil,
+	append: (self: IterableImpl<T>, value: T) -> (),
 }
 
 type Iterable<T> = typeof(setmetatable({} :: Iterable<T>, {})) & IterableImpl<T>
@@ -38,6 +39,10 @@ function Iterable.forEach<T>(self: IterableImpl<T>, func: (currentValue: T, inde
 		func(item, index)
 	end
 	return
+end
+
+function Iterable.append<T>(self: IterableImpl<T>, value: T): ()
+	table.insert(self.t, value)
 end
 
 return createIterable

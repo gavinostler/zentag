@@ -10,7 +10,7 @@ local CacheTag = {
 	_tagWarning = isStudio,
 	_tags = {},
 	_cache = {},
-}
+} :: CacheTagger
 
 type CacheTagger = {
 	_tagWarning: boolean,
@@ -124,9 +124,9 @@ function CacheTag.revalidateTag(self: CacheTagger, tag: string)
 		return
 	end
 
-	Iterable(self._tags[tag]):forEach(function(currentValue: string)
-		self._cache[currentValue].invalid = true
-	end)
+	for _, value in self._tags[tag] do
+		self._cache[value].invalid = true
+	end
 end
 
 --[=[
@@ -144,4 +144,4 @@ function CacheTag.disableTagWarning(self: CacheTagger)
 	self._tagWarning = false
 end
 
-return CacheTag :: CacheTagger
+return CacheTag

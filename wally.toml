@@ -1,7 +1,11 @@
 [package]
 name = "gavinostler/zentag"
-version = "0.2.0"
+authors = ["Gavin Ostler <gvnostler@gmail.com>"]
+license = "MIT"
+version = "0.2.1"
 registry = "https://github.com/UpliftGames/wally-index"
+repository = "https://github.com/gavinostler/zentag"
+include = ["/src"]
 realm = "shared"
 
 [dependencies]
